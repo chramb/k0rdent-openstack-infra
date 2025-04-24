@@ -1,0 +1,74 @@
+apiVersion: k0rdent.mirantis.com/v1alpha1
+kind: ClusterDeployment
+metadata:
+  name: child-cluster
+  namespace: kcm-system
+spec:
+  template: openstack-standalone-cp-0-2-0
+  credential: openstack-cluster-identity-cred
+  serviceSpec:
+  # services:
+  #   - template: ingress-nginx-4-11-3
+  #     name: ingress-nginx
+  #     namespace: ingress-nginx
+  #   - template: external-dns-1-15-1
+  #     name: external-dns
+  #     namespace: external-dns
+  #     values: |
+  #       external-dns:
+  #         provider:
+  #           name: webhook
+  #           webhook:
+  #             image:
+  #               repository: ghcr.io/inovex/external-dns-openstack-webhook
+  #               tag: 1.1.0
+  #             extraVolumeMounts:
+  #               - name: oscloudsyaml
+  #                 mountPath: /etc/openstack/
+  #             resources: {}
+  #         extraVolumes:
+  #           - name: oscloudsyaml
+  #             secret:
+  #               secretName: oscloudsyaml
+  #   - template: gitea-11-0-1
+  #     name: gitea
+  #     namespace: gitea
+  #     values: |
+  #       ingress:
+  #         enabled: true
+  #         className: nginx
+  #         annotations:
+  #           kubernetes.io/ingress.class: nginx
+  #           external-dns.alpha.kubernetes.io/hostname: #URL
+  #         hosts:
+  #           - host: #URL
+  #             paths:
+  #               - path: /
+  #                 pathType: Prefix
+  #         tls: []
+  #       global:
+  #         storageClass: csi-cinder-sc-delete
+  # priority: 100
+  config:
+    controlPlaneNumber: 1
+    workersNumber: 1
+    controlPlane:
+      flavor: m1.medium
+      image:
+        filter:
+          name: ubuntu-22.04-x86_64
+    worker:
+      flavor: m1.medium
+      image:
+        filter:
+          name: ubuntu-22.04-x86_64
+    bastion:
+      enabled: false
+    externalNetwork:
+      filter:
+        name: "public"
+    authURL: #FILLME
+    identityRef:
+      name: openstack-cloud-config
+      cloudName: openstack
+      region: RegionOne

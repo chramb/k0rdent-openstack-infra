@@ -1,0 +1,14 @@
+apiVersion: k0rdent.mirantis.com/v1alpha1
+kind: Credential
+metadata:
+  name: openstack-cluster-identity-cred
+  namespace: kcm-system
+  labels:
+    k0rdent.mirantis.com/component: "kcm"  
+spec:
+  description: "OpenStack credentials"
+  identityRef:
+    apiVersion: v1
+    kind: Secret
+    name: openstack-cloud-config
+    namespace: kcm-system

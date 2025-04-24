@@ -1,0 +1,11 @@
+apiVersion: k0rdent.mirantis.com/v1alpha1
+kind: ClusterTemplateChain
+metadata:
+  name: openstack-standalone-cp-0-2-0
+  namespace: kcm-system
+spec:
+  supportedTemplates:
+    - name: openstack-standalone-cp-0-1-0
+      availableUpgrades:
+        - name: openstack-standalone-cp-0-2-0
+    - name: openstack-standalone-cp-0-2-0
