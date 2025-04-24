@@ -1,0 +1,20 @@
+node_count = 3
+
+
+prefix = "chramb-"
+
+instance_name        = "k0rdent-management"
+instance_image_name  = "ubuntu-22.04-x86_64"
+instance_flavor_name = "m1.large"
+
+capi_secret        = "supersecretpassword"
+openstack_auth_url = "https://keystone.example.com"
+
+dns_zone_name         = "k0rdent.chramb.example.com"
+dns_management_record = "mgmt.chramb.example.com"
+dns_zone_email        = ""
+
+dns_nameservers = ["9.9.9.9", "1.1.1.1" ]
+
+ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICJj6XDn+eDD02i9wC/tQF3WsEMPf2nQsbPoKAFuWVJS"
+

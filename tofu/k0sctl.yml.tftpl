@@ -1,0 +1,29 @@
+apiVersion: k0sctl.k0sproject.io/v1beta1
+kind: Cluster
+metadata:
+  name: k0rdent-management
+  user: admin
+spec:
+  hosts:
+  %{~ for ip in address_public ~}
+  - ssh:
+      address: ${ip}
+      user: user
+    role: ${role}
+    noTaints: true
+    installFlags:
+    - --disable-components=konnectivity-server
+  %{~ endfor ~}
+  k0s:
+    config:
+      spec:
+        network:
+          provider: calico
+          calico:
+            mode: vxlan
+        api:
+          extraArgs:
+            anonymous-auth: "true"
+          externalAddress: ${dns_name}
+          sans:
+          - ${dns_name}

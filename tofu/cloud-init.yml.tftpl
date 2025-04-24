@@ -1,0 +1,14 @@
+#cloud-config
+
+users:
+  - name: user
+    gecos: Cool Guy
+    groups: wheel, sudo
+    chpasswd: { expire: False }
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    passwd: '*'
+    lock_passwd: False
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - "${ ssh_public_key }"
+
