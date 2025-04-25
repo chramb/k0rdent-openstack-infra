@@ -13,6 +13,7 @@ resource "openstack_compute_instance_v2" "management" {
     "${path.module}/cloud-init.yml.tftpl", 
     { 
       ssh_public_key = var.ssh_public_key
+      extra = var.cloud_init_extra
     }))
 }
 

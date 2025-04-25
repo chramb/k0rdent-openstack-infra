@@ -18,3 +18,16 @@ dns_nameservers = ["9.9.9.9", "1.1.1.1" ]
 
 ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICJj6XDn+eDD02i9wC/tQF3WsEMPf2nQsbPoKAFuWVJS"
 
+cloud_init_extra = <<EOF
+write_files:
+ - content: |
+     [plugins."io.containerd.grpc.v1.cri".registry]
+       config_path = "/etc/containerd/certs.d"
+   permissions: "0644"
+   path: /etc/k0s/containerd/registry.toml
+ - content: |
+     [host."https://dockerproxy.example.net"]
+       capabilities = ["pull", "resolve"]
+   path: /etc/containerd/certs.d/_default/hosts.toml
+   permissions: "0644"
+EOF

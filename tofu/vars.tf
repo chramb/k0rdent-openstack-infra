@@ -62,3 +62,7 @@ variable "dns_nameservers" {
 variable "ssh_public_key" {
   type = string
 }
+
+variable "cloud_init_extra" {
+  type = string
+}
